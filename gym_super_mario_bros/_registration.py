@@ -40,7 +40,7 @@ SHORTENED_ENV_NAMES = ['Straight', 'Explore']
 ROM_MODES = ['vanilla', 'downsample', 'pixel', 'rectangle']
 for i, mode in enumerate(ROM_MODES):
     for variant, name in zip(ENV_VARIANTS, SHORTENED_ENV_NAMES):
-        _register_mario_env(f'SuperMarioBros-{name}-v{i}', rom_mode=mode, env_variant=variant)
+        _register_mario_env(f'SuperMarioBros_{name}-v{i}', rom_mode=mode, env_variant=variant)
 
 
 # Super Mario Bros. Random Levels
@@ -54,7 +54,7 @@ _register_mario_env('SuperMarioBrosRandomStages-v3', is_random=True, rom_mode='r
 for i in range(0, 1):
     mode = ROM_MODES[i]
     for variant, name in zip(ENV_VARIANTS, SHORTENED_ENV_NAMES):
-        _register_mario_env(f'SuperMarioBros2-{name}-v{i}', lost_levels=True, rom_mode=mode, env_variant=variant)
+        _register_mario_env(f'SuperMarioBros2_{name}-v{i}', lost_levels=True, rom_mode=mode, env_variant=variant)
 
 
 def _register_mario_stage_env(id: str, **kwargs):
