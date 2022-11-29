@@ -9,7 +9,7 @@ with open('README.md') as README_md:
 
 setup(
     name='gym_super_mario_bros_soumil',
-    version='7.7.0',
+    version='7.8.0',
     description='Super Mario Bros. for OpenAI Gym',
     long_description=README,
     long_description_content_type='text/markdown',
@@ -36,9 +36,9 @@ setup(
         'Topic :: Games/Entertainment :: Side-Scrolling/Arcade Games',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
-    url='https://github.com/Kautenja/gym-super-mario-bros',
-    author='Christian Kauten',
-    author_email='kautencreations@gmail.com',
+    url='https://github.com/Soumil32/gym-super-mario-bros',
+    author='Soumil Gupta',
+    author_email='soumil009@outlook.com',
     license='Proprietary',
     packages=find_packages(exclude=['tests', '*.tests', '*.tests.*']),
     package_data={ 'gym_super_mario_bros': ['_roms/*.nes'] },
