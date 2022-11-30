@@ -15,6 +15,7 @@ def _register_mario_env(id, is_random=False, env_variant='SuperMarioBrosEnvStrai
         None
 
     """
+    entry_point = ''
     # if the is random flag is set
     if is_random:
         # set the entry point to the random level environment
