@@ -10,5 +10,5 @@ __all__ = [
     make.__name__,
     SuperMarioBrosEnv.__name__,
     SuperMarioBrosRandomStagesEnv.__name__,
-    SuperMarioBrosEnvStraight.__name
+    SuperMarioBrosEnvStraight.__name__
 ]
