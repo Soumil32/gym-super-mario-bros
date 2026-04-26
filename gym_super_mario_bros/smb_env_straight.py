@@ -21,17 +21,16 @@ class SuperMarioBrosEnvStraight(SuperMarioBrosEnv):
         return _reward
 
     @property
-    def _time_reward(self):
-        """Return the time reward for the current step"""
-        time_diff = self.time - self.time_last
-        self.time_last = self.time
-
-        # the time can only increase if the game has been reset
-        if time_diff > 0:
+    def _time_penalty(self):
+        """Return the reward for the in-game clock ticking."""
+        _reward = self._time - self._time_last
+        self._time_last = self._time
+        # time can only decrease, a positive reward results from a reset and
+        # should default to 0 reward
+        if _reward > 0:
             return 0
-        # encourage to complete the level as quickly as possible
-        # if the time has decreased, punish the agent. Otherwise, reward it
-        return -1 if time_diff > 0 else 1
+
+        return _reward
 
 
 
