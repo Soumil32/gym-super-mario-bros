@@ -16,6 +16,7 @@ class SuperMarioBrosEnv(NESEnv):
 
     # the legal range of rewards for each step
     reward_range = (-15, 15)
+    metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 30}
 
     def __init__(self, rom_mode='vanilla', lost_levels=False, target=None):
         """
