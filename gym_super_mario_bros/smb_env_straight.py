@@ -36,7 +36,7 @@ class SuperMarioBrosEnvStraight(SuperMarioBrosEnv):
 
     def _get_reward(self):
         """Return the reward after a step occurs."""
-        return self._x_reward + self._time_reward + self._death_penalty
+        return self._x_reward + self._time_penalty + self._death_penalty
 
 
 
