@@ -7,14 +7,18 @@ class SuperMarioBrosEnvStraight(SuperMarioBrosEnv):
         super().__init__(rom_mode=rom_mode, lost_levels=lost_levels, target=target)
 
 
-    @property
+     @property
     def _x_reward(self):
-        """Return the reward for Mario moving in the correct direction"""
-        # encourage to move to the right
-        x_diff = self.x - self.x_last
-        self.x_last = self.x
-        # when the game resets, Mario's x position drastically drops
-        return x_diff if x_diff > -5 else 0
+        """Return the reward based on left right movement between steps."""
+        _reward = self._x_position - self._x_position_last
+        self._x_position_last = self._x_position
+        # TODO: check whether this is still necessary
+        # resolve an issue where after death the x position resets. The x delta
+        # is typically has at most magnitude of 3, 5 is a safe bound
+        if _reward < -5 or _reward > 5:
+            return 0
+
+        return _reward
 
     @property
     def _time_reward(self):
