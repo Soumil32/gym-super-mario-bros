@@ -16,17 +16,6 @@ class SuperMarioBrosEnv(NESEnv):
 
     # the legal range of rewards for each step
     reward_range = (-15, 15)
-    # create a dictionary mapping value of status register to string names
-    _STATUS_MAP = defaultdict(lambda: 'fireball', {0: 'small', 1: 'tall'})
-
-    # a set of state values indicating that Mario is "busy"
-    _BUSY_STATES = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x07]
-
-    # enemies whose context indicate that a stage change will occur (opposed to an
-    # enemy that implies a stage change wont occur -- i.e., a vine)
-    # Bowser = 0x2D
-    # Flagpole = 0x31
-    _STAGE_OVER_ENEMIES = np.array([0x2D, 0x31])
 
     def __init__(self, rom_mode='vanilla', lost_levels=False, target=None):
         """
@@ -45,6 +34,17 @@ class SuperMarioBrosEnv(NESEnv):
         """
         # RAM addresses for enemy types on the screen
         self._ENEMY_TYPE_ADDRESSES = [0x0016, 0x0017, 0x0018, 0x0019, 0x001A]
+        # create a dictionary mapping value of status register to string names
+        self._STATUS_MAP = defaultdict(lambda: 'fireball', {0: 'small', 1: 'tall'})
+    
+        # a set of state values indicating that Mario is "busy"
+        self._BUSY_STATES = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x07]
+    
+        # enemies whose context indicate that a stage change will occur (opposed to an
+        # enemy that implies a stage change wont occur -- i.e., a vine)
+        # Bowser = 0x2D
+        # Flagpole = 0x31
+        self._STAGE_OVER_ENEMIES = np.array([0x2D, 0x31])
         
         # decode the ROM path based on mode and lost levels flag
         rom = rom_path(lost_levels, rom_mode)
@@ -183,7 +183,7 @@ class SuperMarioBrosEnv(NESEnv):
     @property
     def _player_status(self):
         """Return the player status as a string."""
-        return _STATUS_MAP[self.ram[0x0756]]
+        return self._STATUS_MAP[self.ram[0x0756]]
 
     @property
     def _player_state(self):
@@ -227,7 +227,7 @@ class SuperMarioBrosEnv(NESEnv):
     @property
     def _is_busy(self):
         """Return boolean whether Mario is busy with in-game garbage."""
-        return self._player_state in _BUSY_STATES
+        return self._player_state in self._BUSY_STATES
 
     @property
     def _is_world_over(self):
@@ -246,7 +246,7 @@ class SuperMarioBrosEnv(NESEnv):
             # check if the byte is either Bowser (0x2D) or a flag (0x31)
             # this is to prevent returning true when Mario is using a vine
             # which will set the byte at 0x001D to 3
-            if self.ram[address] in _STAGE_OVER_ENEMIES:
+            if self.ram[address] in self._STAGE_OVER_ENEMIES:
                 # player float state set to 3 when sliding down flag pole
                 return self.ram[0x001D] == 3
 
