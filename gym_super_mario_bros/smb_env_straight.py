@@ -7,7 +7,7 @@ class SuperMarioBrosEnvStraight(SuperMarioBrosEnv):
         super().__init__(rom_mode=rom_mode, lost_levels=lost_levels, target=target)
 
 
-     @property
+    @property
     def _x_reward(self):
         """Return the reward based on left right movement between steps."""
         _reward = self._x_position - self._x_position_last
