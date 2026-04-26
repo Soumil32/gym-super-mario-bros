@@ -42,7 +42,7 @@ setup(
     license='Proprietary',
     packages=find_packages(exclude=['tests', '*.tests', '*.tests.*']),
     package_data={ 'gym_super_mario_bros': ['_roms/*.nes'] },
-    install_requires=['nes-py>=8.1.4'],
+    install_requires=['nes-py @ git+https://github.com/Soumil32/nes-py-gymnasium.git'],
     entry_points={
         'console_scripts': [
             'gym_super_mario_bros = gym_super_mario_bros._app.cli:main',
