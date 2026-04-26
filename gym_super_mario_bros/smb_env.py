@@ -369,7 +369,7 @@ class SuperMarioBrosEnv(NESEnv):
     def _death_penalty(self):
         """Return the death penalty for the current step"""
         # if Mario is dead, punish the agent
-        return -30 if self.is_dead or self._is_dying else 0
+        return -30 if self._is_dead or self._is_dying else 0
 
     def _get_info(self):
         """Return the info after a step occurs"""
