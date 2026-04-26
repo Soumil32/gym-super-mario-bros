@@ -3,7 +3,7 @@ class SuperMarioBrosEnvStraight(SuperMarioBrosEnv):
     """This environment focuses on just getting Mario form the start of the level to the end of level
     in the 'traditional' way which is going from the right of the map to left of map whilst trying not to die"""
 
-    def __init__(self, rom_mode='vanilla', lost_levels=False, target=None):
+    def __init__(self, rom_mode='vanilla', lost_levels=False, target=None, render_mode="human"):
         super().__init__(rom_mode=rom_mode, lost_levels=lost_levels, target=target)
 
 
