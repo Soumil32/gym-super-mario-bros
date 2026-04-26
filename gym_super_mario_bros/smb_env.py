@@ -22,9 +22,6 @@ class SuperMarioBrosEnv(NESEnv):
     # a set of state values indicating that Mario is "busy"
     _BUSY_STATES = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x07]
 
-    # RAM addresses for enemy types on the screen
-    _ENEMY_TYPE_ADDRESSES = [0x0016, 0x0017, 0x0018, 0x0019, 0x001A]
-
     # enemies whose context indicate that a stage change will occur (opposed to an
     # enemy that implies a stage change wont occur -- i.e., a vine)
     # Bowser = 0x2D
@@ -46,6 +43,9 @@ class SuperMarioBrosEnv(NESEnv):
             None
 
         """
+        # RAM addresses for enemy types on the screen
+        self._ENEMY_TYPE_ADDRESSES = [0x0016, 0x0017, 0x0018, 0x0019, 0x001A]
+        
         # decode the ROM path based on mode and lost levels flag
         rom = rom_path(lost_levels, rom_mode)
         # initialize the super object with the ROM path
@@ -242,7 +242,7 @@ class SuperMarioBrosEnv(NESEnv):
     def _is_stage_over(self):
         """Return a boolean determining if the level is over."""
         # iterate over the memory addresses that hold enemy types
-        for address in _ENEMY_TYPE_ADDRESSES:
+        for address in self._ENEMY_TYPE_ADDRESSES:
             # check if the byte is either Bowser (0x2D) or a flag (0x31)
             # this is to prevent returning true when Mario is using a vine
             # which will set the byte at 0x001D to 3
