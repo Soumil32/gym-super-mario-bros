@@ -154,7 +154,7 @@ class SuperMarioBrosEnv(NESEnv):
     @property
     def _y_pixel(self):
         """Return the current vertical position."""
-        return self.ram[0x03b8]
+        return int(self.ram[0x03b8])
 
     @property
     def _y_viewport(self):
