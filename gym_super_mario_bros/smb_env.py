@@ -141,7 +141,7 @@ class SuperMarioBrosEnv(NESEnv):
     def _x_position(self):
         """Return the current horizontal position."""
         # add the current page 0x6d to the current x
-        return int(self.ram[0x6d] * 0x100) + int(self.ram[0x86])
+        return int(int(self.ram[0x6d]) * 0x100) + int(self.ram[0x86])
 
     @property
     def _left_x_position(self):
